@@ -1,6 +1,3 @@
 [submodule "mcl"]
 	path = mcl
 	url = https://github.com/chainwayxyz/mcl.git
-[submodule "rv32i-to-bitvm"]
-	path = rv32i-to-bitvm
-	url = https://github.com/chainwayxyz/rv32i-to-bitvm
