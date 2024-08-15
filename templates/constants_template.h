@@ -1,5 +1,3 @@
-#define NPI 4
-
 // #######################
 // ### RISC0 CONSTANTS ###
 // #######################
@@ -9,10 +7,10 @@ const unsigned char BYTES_ALPHA[32] = {vk_alpha_g1};
 const unsigned char BYTES_BETA[64] = {vk_beta_g2};
 const unsigned char BYTES_GAMMA[64] = {vk_gamma_g2};
 const unsigned char BYTES_DELTA[64] = {vk_delta_g2};
-const unsigned char BYTES_GAMMA_ABC[5][32] = {{vk_gamma_abc_0}, {vk_gamma_abc_1}, {vk_gamma_abc_2}, {vk_gamma_abc_3}, {vk_gamma_abc_4}};
+const unsigned char BYTES_GAMMA_ABC[6][32] = {{vk_gamma_abc_0}, {vk_gamma_abc_1}, {vk_gamma_abc_2}, {vk_gamma_abc_3}, {vk_gamma_abc_4}, {vk_gamma_abc_5}};
 
 // first two public inputs are constant
-unsigned char BYTES_PUBLIC_INPUTS[NPI][32] = {{public_input_0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {public_input_1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+unsigned char BYTES_PUBLIC_INPUTS[5][32] = {{public_input_0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {public_input_1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},{public_input_4a, public_input_4b }};
 
 // receipt claim tag, output tag, claim input
 const unsigned char RECEIPT_CLAIM_TAG[] = {receipt_claim_tag};
