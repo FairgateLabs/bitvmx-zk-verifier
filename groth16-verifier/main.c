@@ -117,7 +117,43 @@ void prepare_claim_inputs() {
     }
 }
 
+//TODO: Define section properly
+#define INPUT_SECTION 0x0011b000
+
+int parse_input() {
+    char* input = (char*)INPUT_SECTION;
+    if ((*input) == 0) {
+        return 1;
+    }
+
+    //TODO: Define data structures
+    for (int i = 0; i < 4; i++) {
+        JOURNAL[i] = input[i];
+    }
+    input += 4;
+
+    for (int i = 0; i < 32; i++) {
+        BYTES_PROOF_A[i] = input[i];
+    }
+    input += 32;
+
+    for (int i = 0; i < 64; i++) {
+        BYTES_PROOF_B[i] = input[i];
+    }
+    input += 64;
+
+    for (int i = 0; i < 32; i++) {
+        BYTES_PROOF_C[i] = input[i];
+    }
+
+    return 0;
+}
+
+
 int main() {
+
+    parse_input();
+
     int ret = mclBn_init(MCL_BN_SNARK1, MCLBN_COMPILED_TIME_VAR);
     if (ret != 0) {return 31;}
     VerifyKey vk = get_vk();

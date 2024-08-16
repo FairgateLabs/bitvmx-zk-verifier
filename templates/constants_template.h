@@ -37,9 +37,9 @@ const unsigned char CLAIM_PRE[] = {claim_pre};
 const unsigned char CLAIM_POST[] = {claim_post};
 
 // proof
-const unsigned char BYTES_PROOF_A[32] = {proof_a};
-const unsigned char BYTES_PROOF_B[64] = {proof_b};
-const unsigned char BYTES_PROOF_C[32] = {proof_c};
+unsigned char BYTES_PROOF_A[32] = {proof_a};
+unsigned char BYTES_PROOF_B[64] = {proof_b};
+unsigned char BYTES_PROOF_C[32] = {proof_c};
 
 // journal
-const unsigned char JOURNAL[] = {journalx};
+unsigned char JOURNAL[] = {journalx};
