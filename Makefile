@@ -19,7 +19,7 @@ MCL_LIBRARY?=$(MCL_LIB_DIR)/libmclbn384_256.a
 BIT=32
 TARGET=riscv32
 
-RV32I_FLAGS?=-mcmodel=medany -march=rv32i -mabi=ilp32
+RV32I_FLAGS?=-mcmodel=medany -march=rv32im -mabi=ilp32
 RISCV_FLAGS?=-O3 -T linkers/link.ld -static -fvisibility=hidden -nostdlib -nostartfiles -Wl,--wrap=malloc,--wrap=free -lgcc $(RV32I_FLAGS)
 
 .PHONY: mcl
