@@ -25,7 +25,7 @@ RISCV_FLAGS?=-O3 -T linkers/link.ld -static -fvisibility=hidden -nostdlib -nosta
 .PHONY: mcl
 
 $(MCL_LIBRARY):
-	$(MAKE) -C $(MCL_DIR) -f $(MCL_MAKEFILE) BIT=$(BIT) TARGET=$(TARGET)
+	$(MAKE) -C $(MCL_DIR) -f $(MCL_MAKEFILE) BIT=$(BIT) TARGET=$(TARGET) CUSTOM_FLAGS="$(CUSTOM_FLAGS)"
 
 $(OBJ_DIR)/%.o: $(GROTH16_DIR)/%.c
 	@echo "\033[92mCompiling $< to $@\033[0m"
