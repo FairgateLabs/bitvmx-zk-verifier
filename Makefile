@@ -29,11 +29,11 @@ $(MCL_LIBRARY):
 
 $(OBJ_DIR)/%.o: $(GROTH16_DIR)/%.c
 	@echo "\033[92mCompiling $< to $@\033[0m"
-	$(CLANG) -O3 -c $< -o $@ -I $(MCL_INCLUDE) -I $(MCL_DIR)/src -I $(GROTH16_DIR) $(RV32I_FLAGS) --target=$(TARGET)
+	$(CLANG) -O3 -c $< -o $@ -I $(MCL_INCLUDE) -I $(MCL_DIR)/src -I $(GROTH16_DIR) $(RV32I_FLAGS) --target=$(TARGET) -DINPUT_SECTION=$(INPUT_SECTION) 
 
 zkverifier: $(MCL_LIBRARY) $(OBJ_DIR)/main.o $(OBJ_DIR)/sha256.o
 	@echo "\033[92mLink the object files along with the start file and static library into the final executable \033[0m"
-	$(RISCV_GCC) -DINPUT_SECTION=$(INPUT_SECTION) start.S $(OBJ_DIR)/main.o $(OBJ_DIR)/sha256.o $(MCL_LIBRARY) -o $(BIN_DIR)/zkverifier $(RISCV_FLAGS)
+	$(RISCV_GCC) start.S $(OBJ_DIR)/main.o $(OBJ_DIR)/sha256.o $(MCL_LIBRARY) -o $(BIN_DIR)/zkverifier $(RISCV_FLAGS)
 
 clean:
 	$(RM) $(OBJ_DIR)/main.o
