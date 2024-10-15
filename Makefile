@@ -33,7 +33,7 @@ $(OBJ_DIR)/%.o: $(GROTH16_DIR)/%.c
 
 zkverifier: $(MCL_LIBRARY) $(OBJ_DIR)/main.o $(OBJ_DIR)/sha256.o
 	@echo "\033[92mLink the object files along with the start file and static library into the final executable \033[0m"
-	$(RISCV_GCC) start.S $(OBJ_DIR)/main.o $(OBJ_DIR)/sha256.o $(MCL_LIBRARY) -o $(BIN_DIR)/zkverifier $(RISCV_FLAGS)
+	$(RISCV_GCC) -DINPUT_SECTION=$(INPUT_SECTION) start.S $(OBJ_DIR)/main.o $(OBJ_DIR)/sha256.o $(MCL_LIBRARY) -o $(BIN_DIR)/zkverifier $(RISCV_FLAGS)
 
 clean:
 	$(RM) $(OBJ_DIR)/main.o

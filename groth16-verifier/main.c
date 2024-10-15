@@ -117,8 +117,9 @@ void prepare_claim_inputs() {
     }
 }
 
-//TODO: Define section properly
-#define INPUT_SECTION 0x0011b000
+#ifndef INPUT_SECTION
+#error "INPUT_SECTION must be defined"
+#endif
 
 int parse_input() {
     char* input = (char*)INPUT_SECTION;
