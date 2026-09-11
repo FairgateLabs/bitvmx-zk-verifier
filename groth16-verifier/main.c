@@ -149,7 +149,7 @@ void prepare_claim_inputs(InputData *input_data)
 int main()
 {
 
-    InputData *input_data = (InputData *)INPUT_SECTION;
+    InputData *input_data_prover = (InputData *)INPUT_SECTION;
 
     int ret = mclBn_init(MCL_BN_SNARK1, MCLBN_COMPILED_TIME_VAR);
     if (ret != 0)
@@ -158,15 +158,48 @@ int main()
     }
     VerifyKey vk = get_vk();
 
-    prepare_claim_inputs(input_data);
+    prepare_claim_inputs(input_data_prover);
 
     PublicInputs public_inputs = get_public_inputs();
 
     mclBnG1 prepared_input = prepare_inputs(vk, public_inputs);
 
-    Proof proof = get_proof(input_data);
+    Proof prover_proof = get_proof(input_data_prover);
 
-    return 1 - verify_proof_with_prepared_inputs(vk, proof, prepared_input);
+    int is_valid_prover = verify_proof_with_prepared_inputs(vk, prover_proof, prepared_input);
+
+    if (!is_valid_prover)
+    {
+        return VERIFIER_WINS;
+    }
+    
+    InputData *input_data_verifier = (InputData *)INPUT_SECTION + OFFSET;
+
+    prepare_claim_inputs(input_data_verifier);
+
+    PublicInputs public_inputs = get_public_inputs();
+
+    mclBnG1 prepared_input = prepare_inputs(vk, public_inputs);
+
+    Proof verifier_proof = get_proof(input_data_verifier);
+
+    int is_valid_verifier = verify_proof_with_prepared_inputs(vk, verifier_proof, prepared_input);
+
+    if (!is_valid_verifier)
+    {
+        return PROVER_WINS;
+    }
+
+    // In the future we could verify that from some index all values should match
+    int same_pow = input_data_verifier->journal[POW_PROVER_IDX] == input_data_prover->journal[POW_PROVER_IDX];
+    int same_base_event = input_data_verifier->journal[BASE_EVENT_IDX] == input_data_prover->journal[BASE_EVENT_IDX];
+    int same_last_hash = input_data_verifier->journal[LAST_HASH_IDX] == input_data_prover->journal[LAST_HASH_IDX];
+
+    if (same_pow && same_base_event && same_last_hash) {
+        return VERIFIER_WINS;
+    } else {
+        return PROVER_WINS;
+    }
 }
 
 /// For bare metal:
